@@ -1,3 +1,5 @@
 __pycache__
 .venv/
 [Bb]in/
+[Bb]uild/
+sdkconfig*
