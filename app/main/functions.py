@@ -14,6 +14,10 @@ def esp_get_info(file_path: str) -> str:
     with redirect_stdout(io.StringIO()) as f:
         import esptool
         cmd = ["image_info", "--version", "2", file_path]
-        esptool.main(cmd)
+
+        try:
+            esptool.main(cmd)
+        except Exception as e:
+            return str(e)
 
     return f.getvalue()
