@@ -2,7 +2,7 @@ import os
 from flask import current_app, render_template, request
 from . import main
 from .forms import UploadFileForm
-from .functions import get_esp_info
+from .functions import esp_get_info
 from werkzeug.utils import secure_filename
 
 
@@ -20,6 +20,6 @@ def index():
                 destination = os.path.join(current_app.config['UPLOAD_FOLDER'],
                                            filename)
                 file.save(destination)
-                output = get_esp_info(destination)
+                output = esp_get_info(destination)
 
     return render_template('index.html', form=form, output=output)

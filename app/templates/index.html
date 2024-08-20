@@ -13,7 +13,9 @@
         {{form.file()}}
         {{form.submit()}}
         {{', '.join(form.file.errors)}}
-        <p>{{output}}</p>
+        {% for paragraph in output | splitstr %}
+            <p>{{paragraph}}</p>
+        {% endfor %}
     </form>
 </body>
 </html>

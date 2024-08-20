@@ -1,4 +1,4 @@
-def get_esp_info(destination):
+def esp_get_info(file_path: str) -> str:
     '''
     returns info from esp32 binary (.bin) file
 
@@ -6,8 +6,6 @@ def get_esp_info(destination):
     we therefore need to redirect standard output
     reference: https://blog.golioth.io/tag/esptool-py/
     reference: https://stackoverflow.com/a/16571630/922013
-
-    TODO: why are line breaks not preserved here?
     '''
 
     import io
@@ -15,7 +13,7 @@ def get_esp_info(destination):
 
     with redirect_stdout(io.StringIO()) as f:
         import esptool
-        cmd = ["image_info", "--version", "2", str(destination)]
+        cmd = ["image_info", "--version", "2", file_path]
         esptool.main(cmd)
 
     return f.getvalue()
