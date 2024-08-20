@@ -7,6 +7,7 @@ repos:
         exclude: requirements.txt
     -   id: check-yaml
     -   id: check-added-large-files
+        args: ['--maxkb=3000']  # needed for tests/resources
     -   id: no-commit-to-branch
         args: ['--branch', 'main']
 -   repo: https://github.com/PyCQA/flake8
