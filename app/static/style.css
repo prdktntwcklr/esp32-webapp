@@ -1,0 +1,4 @@
+/* override Bootstrap to fix "jumping" webpage by always displaying scrollbar */
+html {
+    overflow-y: scroll;
+}

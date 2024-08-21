@@ -15,7 +15,7 @@ def is_file_allowed(filename: str, allowed_extensions: list[str]) -> bool:
 @main.errorhandler(413)
 def file_too_large(e):
     max_file_size = current_app.config['MAX_CONTENT_LENGTH'] / 1000 / 1000
-    msg_too_large = 'File is too large (max: ' + str(max_file_size) + 'MB)'
+    msg_too_large = 'File is too large (max: ' + str(max_file_size) + 'MB)!'
     flash(msg_too_large, 'error')
     return redirect(url_for('main.index'))
 
@@ -37,7 +37,7 @@ def index():
 
         if not file or not is_file_allowed(file.filename, allowed_extensions):
             msg_invalid_file = 'Invalid file type (allowed: '\
-                 + ', '.join(allowed_extensions) + ')'
+                 + ', '.join(allowed_extensions) + ')!'
             flash(msg_invalid_file, 'error')
 
             return redirect(url_for('main.index'))
@@ -48,6 +48,9 @@ def index():
         file.save(filepath)
 
         esp_info = esp_get_info(filepath)
+
+        success_msg = "File " + str(filename) + " successfully analyzed!"
+        flash(success_msg, 'success')
 
         return render_template('index.html', form=form, esp=esp_info)
 
