@@ -1,5 +1,6 @@
 import os
-from flask import current_app, flash, render_template, request
+from flask import current_app, flash, render_template, request, redirect, \
+    url_for
 from . import main
 from .forms import UploadFileForm
 from .functions import esp_get_info
@@ -11,6 +12,14 @@ def is_file_allowed(filename: str, allowed_extensions: list[str]) -> bool:
            filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 
+@main.errorhandler(413)
+def file_too_large(e):
+    max_file_size = current_app.config['MAX_CONTENT_LENGTH'] / 1000 / 1000
+    msg_too_large = 'File is too large (max: ' + str(max_file_size) + 'MB)'
+    flash(msg_too_large, 'error')
+    return redirect(url_for('main.index'))
+
+
 @main.route("/", methods=['GET', 'POST'])
 def index():
     form = UploadFileForm()
@@ -20,7 +29,7 @@ def index():
         if 'file' not in request.files:
             flash('No file found', 'error')
 
-            return render_template('index.html', form=form, esp="")
+            return redirect(url_for('main.index'))
 
         # check if file exists and has allowed extension
         file = request.files['file']
@@ -31,7 +40,7 @@ def index():
                  + ', '.join(allowed_extensions) + ')'
             flash(msg_invalid_file, 'error')
 
-            return render_template('index.html', form=form, esp="")
+            return redirect(url_for('main.index'))
 
         # everything ok, get esp info from file
         filename = secure_filename(file.filename)
@@ -42,4 +51,4 @@ def index():
 
         return render_template('index.html', form=form, esp=esp_info)
 
-    return render_template('index.html', form=form, esp="")
+    return render_template('index.html', form=form)
