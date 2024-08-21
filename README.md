@@ -1,6 +1,6 @@
 # ESP32 Web App
 
-This is a simple web application to display information about ESP32 binaries. Users can upload a binary file and receive information such as the project name, compile time, and ESP-IDF version directly from within their browser.
+This is a simple web application to display information about ESP32 binaries. Users can upload a binary file and receive information such as the project name, compile time, and ESP-IDF version directly from within their web browser.
 
 ## Using Docker to build the example application for ESP32
 
@@ -32,10 +32,10 @@ You can then visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) to try out t
 
 ## Running tests
 
-The application is covered by a set of unit and integration tests. To run the tests, execute the following command from within your Python virtual environment:
+The application is covered by a set of unit and integration tests. To run the tests, execute the following command:
 
 ```Powershell
 pytest -v
 ```
 
-These tests also run automatically as part of a CI/CD pipeline when creating a new pull request.
+These tests also run automatically as part of a CI/CD pipeline on new pull requests.
