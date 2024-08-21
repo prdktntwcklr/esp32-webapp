@@ -1,3 +1,8 @@
+import esptool
+import io
+from contextlib import redirect_stdout
+
+
 def esp_get_info(file_path: str) -> str:
     '''
     returns info from esp32 binary (.bin) file
@@ -8,11 +13,7 @@ def esp_get_info(file_path: str) -> str:
     reference: https://stackoverflow.com/a/16571630/922013
     '''
 
-    import io
-    from contextlib import redirect_stdout
-
     with redirect_stdout(io.StringIO()) as f:
-        import esptool
         cmd = ["image_info", "--version", "2", file_path]
 
         try:
