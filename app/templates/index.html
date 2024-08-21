@@ -13,8 +13,16 @@
         {{form.file()}}
         {{form.submit()}}
     </form>
-    {% for paragraph in output | splitstr %}
-    <p>{{paragraph}}</p>
-    {% endfor %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+        {% else %}
+            {% for paragraph in esp | splitstr %}
+            <p>{{paragraph}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 </body>
 </html>

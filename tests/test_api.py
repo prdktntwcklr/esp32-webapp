@@ -25,7 +25,7 @@ def test_elf_file(client):
     )
 
     assert response.status_code == 200
-    assert b"Invalid file (allowed: bin)" in response.data
+    assert b"Invalid file type (allowed: bin)" in response.data
 
 
 def test_fake_bin_file(client):
@@ -40,4 +40,5 @@ def test_fake_bin_file(client):
 def test_no_file(client):
     response = client.post('/', data=dict({'file': None}))
 
-    assert response.status_code == 400
+    assert response.status_code == 200
+    assert b"No file found" in response.data
