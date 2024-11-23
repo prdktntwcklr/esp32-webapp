@@ -1,3 +1,7 @@
+"""Module providing general functions for the web application."""
+
+# pylint: disable=broad-exception-caught
+
 import esptool
 import io
 from contextlib import redirect_stdout
@@ -9,8 +13,9 @@ def esp_get_info(file_path: str) -> str:
 
     NOTE: esptool.main does not include an API to simply return its output
     we therefore need to redirect standard output
-    reference: https://blog.golioth.io/tag/esptool-py/
-    reference: https://stackoverflow.com/a/16571630/922013
+
+    REF: https://blog.golioth.io/tag/esptool-py/
+    REF: https://stackoverflow.com/a/16571630/922013
     '''
 
     with redirect_stdout(io.StringIO()) as f:
