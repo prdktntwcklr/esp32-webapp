@@ -30,6 +30,8 @@ jobs:
         name: hello_world.bin
         path: |
           examples/hello_world/build/hello_world.bin
+        retention-days: 5
+
   unit-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 5
