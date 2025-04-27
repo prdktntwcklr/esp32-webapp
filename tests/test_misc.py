@@ -1,3 +1,8 @@
+"""
+Test the `is_file_allowed` function from the `app.main.views` module.
+"""
+
+
 from app.main.views import is_file_allowed
 
 

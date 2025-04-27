@@ -14,6 +14,9 @@ ignore=third_party
 # matches against base names, not paths.
 ignore-patterns=
 
+# Paths matching the regex patterns are skipped.
+ignore-paths=^examples/hello_world/.*$
+
 # Pickle collected data for later comparisons.
 persistent=no
 

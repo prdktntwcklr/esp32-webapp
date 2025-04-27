@@ -1,7 +1,13 @@
+"""
+Pytest fixtures for setting up the Flask application and test environment.
+"""
+
 import pytest
 
 from app import create_app
 
+
+# pylint: disable=redefined-outer-name
 
 @pytest.fixture()
 def app():
