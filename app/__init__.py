@@ -1,3 +1,9 @@
+"""
+Creates and configures the Flask application instance.
+"""
+
+# pylint: disable=import-outside-toplevel
+
 from flask import Flask
 from config import config
 
