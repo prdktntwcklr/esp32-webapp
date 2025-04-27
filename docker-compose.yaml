@@ -1,0 +1,10 @@
+services:
+  idf-build:
+    image: espressif/idf:release-v5.3
+    working_dir: /project
+    environment:
+      - HOME=/tmp
+      - IDF_TARGET=esp32
+    volumes:
+      - ./examples/hello_world:/project
+    command: idf.py build
