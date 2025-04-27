@@ -25,12 +25,11 @@ analyzed
 To avoid having to install the complete `ESP-IDF` toolchain on your machine, you
 can use a pre-built `Docker` image that includes all required dependencies.
 
-From within [`examples/hello_world`](examples/hello_world), run the following
-command from a `Powershell` prompt to build the binaries for the `hello_world`
+Run the following command from a terminal to build the binaries for the `hello_world`
 application:
 
-```Powershell
-docker run --rm -v ${PWD}:/project -w /project -e HOME=/tmp -e IDF_TARGET='esp32' espressif/idf:release-v5.3 idf.py build
+```bash
+docker compose run --rm idf-build
 ```
 
 Refer to the [relevant parts of the ESP-IDF documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/tools/idf-docker-image.html)
@@ -42,25 +41,25 @@ You can use this project locally on your machine. From within a [Python virtual 
 install the required packages (listed in
 [`requirements.txt`](requirements.txt)):
 
-```Powershell
+```bash
 pip install -r requirements.txt
 ```
 
 And start the development server by typing:
 
-```Powershell
+```bash
 flask run
 ```
 
-You can then visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
-to try out the application.
+You can then visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your
+browser to try out the application.
 
 ## Tests
 
 The application is covered by a set of unit and integration tests. To run
 the tests, execute the following command from the top level directory:
 
-```Powershell
+```bash
 pytest -v
 ```
 
