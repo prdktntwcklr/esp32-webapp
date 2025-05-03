@@ -1,0 +1,39 @@
+name: build
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/build.yaml"
+      - "examples/**"
+  workflow_dispatch:
+
+jobs:
+  build-binaries:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: esp-idf build
+      uses: espressif/esp-idf-ci-action@v1
+      with:
+        esp_idf_version: v5.3
+        target: esp32
+        path: 'examples/hello_world'
+
+    - name: store artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: hello_world.bin
+        path: |
+          examples/hello_world/build/hello_world.bin
+        retention-days: 5
