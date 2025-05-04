@@ -11,7 +11,7 @@ from app import create_app
 
 @pytest.fixture()
 def app():
-    app = create_app('testing')
+    app = create_app("testing")
 
     yield app
 

@@ -30,6 +30,7 @@ def file_too_large(e):
 def index():
     form = UploadFileForm()
 
+    # handle the POST request
     if request.method == "POST":
         # check if the post request has the file part
         if "file" not in request.files:
@@ -60,4 +61,5 @@ def index():
 
         return render_template("index.html", form=form, esp=esp_info)
 
+    # otherwise, handle the GET request
     return render_template("index.html", form=form)
