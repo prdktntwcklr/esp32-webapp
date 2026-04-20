@@ -37,30 +37,38 @@ for details on how to use the ESP-IDF Docker image.
 
 ## Running the project locally
 
-You can use this project locally on your machine. From within a [Python virtual environment](https://docs.python.org/3/library/venv.html),
-install the required packages (listed in
-[`requirements.txt`](requirements.txt)):
+You can run this project locally on your machine using Docker.
+
+First, build the Docker image from the project directory:
 
 ```bash
-pip install -r requirements.txt
+docker build -t flask-app .
 ```
 
-And start the development server by typing:
+This command will create an image called flask-app using the Dockerfile in the
+top-level directory of this repo.
+
+Once the image is built, run the Flask app in a Docker container:
 
 ```bash
-flask run
+docker run --rm -p 5000:5000 flask-app
 ```
 
-You can then visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your
-browser to try out the application.
+This will start the Flask app inside the container, and map port `5000` in the
+container to port `5000` on your host machine.
+
+You can then access the application in your web browser at:
+
+```text
+http://127.0.0.1:5000/
+```
 
 ## Tests
 
-The application is covered by a set of unit and integration tests. To run
-the tests, execute the following command from the top level directory:
+Once the image is built (see above), run the tests inside the container:
 
 ```bash
-pytest -v
+docker run --rm flask-app pytest -v
 ```
 
 ## CI/CD Pipeline
