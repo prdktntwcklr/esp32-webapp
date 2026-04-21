@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-unit-tests:
+  run-tests:
     runs-on: ubuntu-22.04
     timeout-minutes: 5
 
