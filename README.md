@@ -1,24 +1,24 @@
 # ESP32 Web App
 
-This is a simple web application to display information about ESP32 binaries.
-Users can upload a binary file and receive information such as the project
-name, compile time, and ESP-IDF version directly from within their web browser.
+This web application allows users to upload ESP32 binary files and extract
+useful information such as the project name, compile time, and ESP-IDF version
+directly within their browser.
 
 The binary analyzer uses the official [espressif/esptool](https://github.com/espressif/esptool)
 utility that runs integrated into a Python backend built with Flask.
 
 ## Screenshot
 
-The screenshot below shows the output from a successfully analyzed binary.
+Below is a screenshot showing the output of a successfully analyzed binary:
 
 ![Binary Info Success](docs/esp_webapp_success.png)
 
 ## Project structure
 
-- `app` - web application built with Flask
-- `examples/hello_world` – simple example application for ESP32 that can be
-analyzed
-- `tests` - collection of unit and integration tests
+- `app/` - web application built with Flask
+- `examples/hello_world/` – example application for ESP32 for analysis
+- `scripts/` - utility scripts
+- `tests/` - collection of unit and integration tests
 
 ## Using Docker to build the example application for ESP32
 
@@ -32,42 +32,39 @@ application:
 docker compose run --rm idf-build
 ```
 
-Refer to the [relevant parts of the ESP-IDF documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/tools/idf-docker-image.html)
-for details on how to use the ESP-IDF Docker image.
+After the build has completed, you can then find the binary under `examples/hello_world/build/hello_world.bin`.
 
 ## Running the project locally
 
-You can run this project locally on your machine using Docker.
-
-First, build the Docker image from the project directory:
+You can run this project locally using Docker. First, build the Docker image
+from the project's root directory:
 
 ```bash
 docker build -t flask-app .
 ```
 
-This command will create an image called flask-app using the Dockerfile in the
-top-level directory of this repo.
-
-Once the image is built, run the Flask app in a Docker container:
+Once the image is built, run the application inside the container:
 
 ```bash
 docker run --rm -p 5000:5000 flask-app
 ```
 
-This will start the Flask app inside the container, and map port `5000` in the
+This will start the Flask app in a Docker container, mapping port `5000` in the
 container to port `5000` on your host machine. You should see the following logs
 appearing in your terminal:
 
 ```text
- * Debug mode: off
-WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5000
- * Running on http://172.17.0.2:5000
-Press CTRL+C to quit
+[2026-04-21 01:08:17 +0000] [1] [INFO] Starting gunicorn 25.3.0
+[2026-04-21 01:08:17 +0000] [1] [INFO] Listening at: http://0.0.0.0:5000 (1)
+[2026-04-21 01:08:17 +0000] [1] [INFO] Using worker: sync
+[2026-04-21 01:08:17 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-04-21 01:08:17 +0000] [8] [INFO] Booting worker with pid: 8
+[2026-04-21 01:08:17 +0000] [9] [INFO] Booting worker with pid: 9
+[2026-04-21 01:08:17 +0000] [10] [INFO] Booting worker with pid: 10
+[2026-04-21 01:08:17 +0000] [1] [INFO] Control socket listening at /root/.gunicorn/gunicorn.ctl
 ```
 
-You can then access the application in your web browser at the above URL:
+You can then access the application in your web browser at the following URL:
 
 ```text
 http://127.0.0.1:5000/
@@ -78,7 +75,32 @@ http://127.0.0.1:5000/
 Once the image is built (see above), run the tests inside the container:
 
 ```bash
-docker run --rm flask-app pytest -v
+docker run --rm flask-app pytest -v tests
+```
+
+Expected output:
+
+```text
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-8.3.2, pluggy-1.5.0 -- /usr/local/bin/python3.11
+cachedir: .pytest_cache
+rootdir: /appdir
+collecting ... collected 12 items
+
+tests/test_api.py::test_index_page PASSED                                [  8%]
+tests/test_api.py::test_bin_file PASSED                                  [ 16%]
+tests/test_api.py::test_elf_file PASSED                                  [ 25%]
+tests/test_api.py::test_fake_bin_file PASSED                             [ 33%]
+tests/test_api.py::test_no_file PASSED                                   [ 41%]
+tests/test_api.py::test_large_file PASSED                                [ 50%]
+tests/test_basics.py::test_app_is_testing PASSED                         [ 58%]
+tests/test_functions.py::test_empty_filename PASSED                      [ 66%]
+tests/test_functions.py::test_with_filename PASSED                       [ 75%]
+tests/test_functions.py::test_exception_thrown PASSED                    [ 83%]
+tests/test_functions.py::test_esp_get_info_success PASSED                [ 91%]
+tests/test_misc.py::test_is_file_allowed PASSED                          [100%]
+
+============================== 12 passed in 0.14s ==============================
 ```
 
 ## CI/CD Pipeline
