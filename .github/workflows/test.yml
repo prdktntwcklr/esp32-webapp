@@ -11,9 +11,18 @@ jobs:
 
     steps:
       - name: checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
 
-      - name: build Docker image and run tests
+      - name: run smoke test
         run: |
           docker build -t flask-app .
-          docker run --rm flask-app pytest -v
+          docker run --rm -p 5000:5000 flask-app &
+          # Wait for the Flask app to start and perform the smoke test
+          sleep 5
+          chmod +x ./scripts/smoke_test.sh
+          ./scripts/smoke_test.sh
+
+      - name: run pytest tests
+        run: |
+          docker build -t flask-app .
+          docker run --rm flask-app pytest -v tests
