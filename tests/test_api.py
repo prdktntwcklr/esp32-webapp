@@ -15,6 +15,12 @@ def test_index_page(client):
     assert b"ESP32 Binary Analyzer" in response.data
 
 
+def test_health_check(client):
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert b'"status":"healthy"' in response.data
+
+
 def test_bin_file(client):
     response = client.post(
         "/", data=dict({"file": (resources / "hello_world.bin").open("rb")})

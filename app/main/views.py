@@ -4,8 +4,8 @@ Flask application.
 """
 
 import os
-from flask import current_app, flash, render_template, request, redirect, \
-    url_for
+from flask import current_app, flash, jsonify, render_template, request, \
+    redirect, url_for
 from . import main
 from .forms import UploadFileForm
 from .functions import esp_get_info
@@ -63,3 +63,8 @@ def index():
 
     # otherwise, handle the GET request
     return render_template("index.html", form=form)
+
+
+@main.route("/health", methods=["GET"])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
