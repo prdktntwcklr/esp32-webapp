@@ -2,13 +2,8 @@
 
 set -eou pipefail
 
-URL="http://127.0.0.1:5000"
-
-docker build -t flask-app .
-docker run --rm -p 5000:5000 flask-app &
-
-echo "Waiting for the Flask app to start..."
-sleep 5
+PORT=5000
+URL="http://127.0.0.1:$PORT"
 
 echo "Performing smoke test by sending a request to $URL"
 
