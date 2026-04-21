@@ -55,9 +55,19 @@ docker run --rm -p 5000:5000 flask-app
 ```
 
 This will start the Flask app inside the container, and map port `5000` in the
-container to port `5000` on your host machine.
+container to port `5000` on your host machine. You should see the following logs
+appearing in your terminal:
 
-You can then access the application in your web browser at:
+```text
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+Press CTRL+C to quit
+```
+
+You can then access the application in your web browser at the above URL:
 
 ```text
 http://127.0.0.1:5000/
