@@ -106,5 +106,5 @@ tests/test_misc.py::test_is_file_allowed PASSED                          [100%]
 ## CI/CD Pipeline
 
 Both the build of the example application and the tests run automatically as
-part of a CI/CD pipeline on every pull request. See [`.github/workflows/main.yml`](.github/workflows/main.yml)
-for details.
+part of a CI/CD pipeline on every pull request. See the [`.github/workflows/`](.github/workflows/)
+folder for details.
