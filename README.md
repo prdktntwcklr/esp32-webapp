@@ -59,15 +59,17 @@ container to port `5000` on your host machine. You should see the following logs
 appearing in your terminal:
 
 ```text
- * Debug mode: off
-WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on all addresses (0.0.0.0)
- * Running on http://127.0.0.1:5000
- * Running on http://172.17.0.2:5000
-Press CTRL+C to quit
+[2026-04-21 01:08:17 +0000] [1] [INFO] Starting gunicorn 25.3.0
+[2026-04-21 01:08:17 +0000] [1] [INFO] Listening at: http://0.0.0.0:5000 (1)
+[2026-04-21 01:08:17 +0000] [1] [INFO] Using worker: sync
+[2026-04-21 01:08:17 +0000] [7] [INFO] Booting worker with pid: 7
+[2026-04-21 01:08:17 +0000] [8] [INFO] Booting worker with pid: 8
+[2026-04-21 01:08:17 +0000] [9] [INFO] Booting worker with pid: 9
+[2026-04-21 01:08:17 +0000] [10] [INFO] Booting worker with pid: 10
+[2026-04-21 01:08:17 +0000] [1] [INFO] Control socket listening at /root/.gunicorn/gunicorn.ctl
 ```
 
-You can then access the application in your web browser at the above URL:
+You can then access the application in your web browser at the following URL:
 
 ```text
 http://127.0.0.1:5000/

@@ -45,6 +45,8 @@ flask==3.0.3
     #   flask-wtf
 flask-wtf==1.2.1
     # via -r requirements.in
+gunicorn==25.3.0
+    # via -r requirements.in
 identify==2.6.19
     # via pre-commit
 iniconfig==2.0.0
@@ -71,7 +73,9 @@ mccabe==0.7.0
 nodeenv==1.10.0
     # via pre-commit
 packaging==24.1
-    # via pytest
+    # via
+    #   gunicorn
+    #   pytest
 platformdirs==4.9.6
     # via
     #   pylint
